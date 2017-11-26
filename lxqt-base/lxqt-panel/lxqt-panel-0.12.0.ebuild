@@ -9,37 +9,37 @@ HOMEPAGE="http://lxqt.org/"
 
 if [[ ${PV} = *9999* ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="git://git.lxde.org/git/lxde/${PN}.git"
+	EGIT_REPO_URI="https://github.com/lxde/${PN}.git"
 else
-	SRC_URI="https://downloads.lxqt.org/downloads/${PN}/${PV}/${P}.tar.xz"
+	SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 fi
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
 IUSE="+alsa clock colorpicker cpuload +desktopswitch +directorymenu dom +kbindicator +mainmenu
-	+mount networkmonitor pulseaudio +quicklaunch sensors +showdesktop +spacer
-	statusnotifier sysstat +taskbar +tray +volume +worldclock"
+	+mount networkmonitor pulseaudio +quicklaunch sensors +showdesktop
+	+spacer statusnotifier sysstat +taskbar +tray +volume +worldclock"
 REQUIRED_USE="volume? ( || ( alsa pulseaudio ) )"
 
 CDEPEND="
 	dev-libs/glib:2
-	>=dev-libs/libqtxdg-3.1.0
-	dev-qt/qtcore:5
-	dev-qt/qtdbus:5
-	dev-qt/qtgui:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtx11extras:5
-	dev-qt/qtxml:5
-	kde-frameworks/kguiaddons:5
-	kde-frameworks/kwindowsystem:5[X]
+	>=dev-libs/libqtxdg-3.1.0:=
+	dev-qt/qtcore:5=
+	dev-qt/qtdbus:5=
+	dev-qt/qtgui:5=
+	dev-qt/qtwidgets:5=
+	dev-qt/qtx11extras:5=
+	dev-qt/qtxml:5=
+	kde-frameworks/kguiaddons:5=
+	kde-frameworks/kwindowsystem:5=[X]
 	>=lxde-base/menu-cache-0.3.3
 	~lxqt-base/liblxqt-${PV}
 	~lxqt-base/lxqt-globalkeys-${PV}
 	x11-libs/libX11
 	cpuload? ( sys-libs/libstatgrab )
 	kbindicator? ( x11-libs/libxkbcommon )
-	mount? ( kde-frameworks/solid:5 )
+	mount? ( kde-frameworks/solid:5= )
 	networkmonitor? ( sys-libs/libstatgrab )
 	sensors? ( sys-apps/lm_sensors )
 	statusnotifier? ( dev-libs/libdbusmenu-qt[qt5(+)] )
@@ -49,12 +49,20 @@ CDEPEND="
 		x11-libs/libXrender )
 	volume? ( alsa? ( media-libs/alsa-lib )
 		pulseaudio? ( media-sound/pulseaudio ) )
-	!lxqt-base/lxqt-common"
+	!lxqt-base/lxqt-common
+"
 DEPEND="${CDEPEND}
-	dev-qt/linguist-tools:5"
+	>=dev-util/lxqt-build-tools-0.4.0
+	dev-qt/linguist-tools:5=
+"
 RDEPEND="${CDEPEND}
-	dev-qt/qtsvg:5
-	>=lxde-base/lxmenu-data-0.1.2"
+	dev-qt/qtsvg:5=
+	>=lxde-base/lxmenu-data-0.1.2
+"
+
+PATCHES=(
+	"${FILESDIR}/${P}-worldclock-pull-438.patch"
+)
 
 src_configure() {
 	local mycmakeargs i y

@@ -10,8 +10,8 @@
     <flag name="colorpicker">Build colorpicker plugin</flag>
     <flag name="cpuload">Build cpuload plugin</flag>
     <flag name="desktopswitch">Build desktopswitch plugin</flag>
-    <flag name="dom">Build dom plugin</flag>
     <flag name="directorymenu">Build directorymenu plugin</flag>
+    <flag name="dom">Build dom plugin</flag>
     <flag name="kbindicator">Build kbindicator plugin</flag>
     <flag name="mainmenu">Build mainmenu plugin</flag>
     <flag name="mount">Build mount plugin</flag>

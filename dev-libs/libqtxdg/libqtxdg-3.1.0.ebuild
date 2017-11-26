@@ -1,31 +1,31 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit cmake-utils virtualx
+EAPI=6
+inherit cmake-utils virtualx versionator
 
 DESCRIPTION="A Qt implementation of XDG standards"
 HOMEPAGE="http://lxqt.org/"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="git://git.lxde.org/git/lxde/${PN}.git"
+	EGIT_REPO_URI="https://github.com/lxde/${PN}.git"
 else
-	SRC_URI="https://downloads.lxqt.org/downloads/${PN}/${PV}/${P}.tar.xz"
+	SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 fi
 
 LICENSE="LGPL-2.1"
-SLOT="0"
+SLOT="0/$(get_version_component_range 1)"
 IUSE="test"
 
 CDEPEND="
-	dev-qt/qtcore:5
-	dev-qt/qtdbus:5
-	dev-qt/qtgui:5
-	dev-qt/qtsvg:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtxml:5
+	dev-qt/qtcore:5=
+	dev-qt/qtdbus:5=
+	dev-qt/qtgui:5=
+	dev-qt/qtsvg:5=
+	dev-qt/qtwidgets:5=
+	dev-qt/qtxml:5=
 "
 DEPEND="${CDEPEND}
 	virtual/pkgconfig

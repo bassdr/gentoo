@@ -20,7 +20,7 @@ LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
 CDEPEND="
-	>=dev-libs/libqtxdg-1.0.0
+	>=dev-libs/libqtxdg-1.0.0:=
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
